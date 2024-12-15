@@ -34,7 +34,7 @@ export default function ChatBox() {
   }
 
   const handleKeyPress = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.charCode !== 13 || messageTextIsEmpty) {
+    if (event.key !== "Enter" || messageTextIsEmpty) {
       return;
     }
     sendChatMessage(messageText);
@@ -51,20 +51,23 @@ export default function ChatBox() {
   });
 
   return (
-    <div >
-      <div >
+    <div className='flex flex-col' >
+      <div className='flex flex-col gap-4 p-4' >
         {messages}
         <div ref={messageEnd}></div>
       </div>
-      <form onSubmit={handleFormSubmission} >
+      <form 
+      className='flex mt-auto'
+      onSubmit={handleFormSubmission} >
         <textarea
           ref={inputBox}
           value={messageText}
           placeholder="Type a message..."
           onChange={e => setMessageText(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
+          className='mb-0 p-2 border border-black rounded-md w-[90%] h-20'
         ></textarea>
-        <button type="submit"  disabled={messageTextIsEmpty}>Send</button>
+        <button type="submit" className='bg-blue-400 border border-black rounded-sm w-[10%]' disabled={messageTextIsEmpty}>Send</button>
       </form>
     </div>
   );

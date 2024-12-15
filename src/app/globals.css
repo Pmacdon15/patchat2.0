@@ -1,16 +1,18 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --border: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --border: #000000;
   }
 }
 
@@ -18,9 +20,10 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-} */
+  border: var(--border);
+}
 html,
-body {
+/* body {
   padding: 0;
   margin: 0;
   font-family:
@@ -35,11 +38,11 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
-}
+} */
 
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 [data-author='me'] {
   background: linear-gradient(
@@ -53,14 +56,14 @@ body {
   border-bottom-left-radius: 10px !important;
 }
 
-.container {
+/* .container {
   display: grid;
   grid-template-rows: 1fr 100px;
   min-height: 100vh;
   background-color: #eee;
-}
+} */
 
-main {
+/* main {
   display: grid;
   grid-template-rows: auto 1fr;
   width: calc(100% - 40px);
@@ -70,8 +73,8 @@ main {
   overflow: hidden;
   box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.2);
   background-color: white;
-}
-
+} */
+/* 
 .title {
   display: flex;
   justify-content: center;
@@ -140,4 +143,4 @@ footer {
   .ably {
     height: 60px;
   }
-}
+} */
