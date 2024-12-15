@@ -7,7 +7,7 @@ interface Message {
     connectionId?: string;
 }
 
-export default function ChatBox() {
+export default function ChatBox({ username }: { username: string }) {
     const [messageText, setMessageText] = useState<string>("");
     const [receivedMessages, setMessages] = useState<Message[]>([]);
     const messageTextIsEmpty = messageText.trim().length === 0;
@@ -27,7 +27,7 @@ export default function ChatBox() {
     const messageEnd = useRef<HTMLDivElement>(null);
 
     const sendChatMessage = (messageText: string) => {
-        const message = { data: { author: "bob", text: messageText } };
+        const message = { data: { author: username ||"unknown user" , text: messageText } };
         channel.publish(message); // Publish message to Ably
         setMessageText(""); // Clear the input box
         inputBox.current?.focus();
