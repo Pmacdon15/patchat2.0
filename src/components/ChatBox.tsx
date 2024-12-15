@@ -42,8 +42,8 @@ export default function ChatBox() {
   }
 
   const messages = receivedMessages.map((message, index) => {
-    const author = message.connectionId === ably.connection.id ? "me" : "other";
-    return <span key={index}  data-author={author}>{message.data}</span>;
+    // const author = message.connectionId === ably.connection.id ? "me" : "other";
+    return <span key={index} className='bg-blue-300 p-3 rounded-lg w-fit' >{message.data}</span>;
   });
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function ChatBox() {
   });
 
   return (
-    <div className='flex flex-col' >
+    <div className='flex flex-col text-gray-500' >
       <div className='flex flex-col gap-4 p-4' >
         {messages}
         <div ref={messageEnd}></div>
