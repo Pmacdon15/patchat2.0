@@ -70,11 +70,11 @@ export default function ChatBox() {
                     placeholder="Type a message..."
                     onChange={(e) => setMessageText(e.target.value)}
                     onKeyDown={handleKeyPress}
-                    className="mb-0 p-2 border-t border-black rounded-sm w-[70%] md:w-[80%] h-20"
+                    className="mb-0 p-2 border-t border-black focus:border-b-0 rounded-sm w-[70%] md:w-[80%] h-20 focus:outline-none"
                 ></textarea>
                 <button
                     type="submit"
-                    className="bg-blue-400 border-t border-black rounded-sm w-[30%] md:w-[20%] h-20"
+                    className="bg-blue-400 hover:bg-blue-500 border-t border-black rounded-sm w-[30%] md:w-[20%] h-20 hover:text-white"
                     disabled={messageTextIsEmpty}
                 >
                     Send
