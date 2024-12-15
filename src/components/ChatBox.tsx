@@ -60,14 +60,14 @@ export default function ChatBox() {
       className='flex mt-auto'
       onSubmit={handleFormSubmission} >
         <textarea
-          ref={inputBox}
-          value={messageText}
-          placeholder="Type a message..."
-          onChange={e => setMessageText(e.target.value)}
-          onKeyDown={handleKeyPress}
-          className='mb-0 p-2 border border-black rounded-md w-[90%] h-20'
+            ref={inputBox}
+            value={messageText}
+            placeholder="Type a message..."
+            onChange={e => setMessageText(e.target.value)}
+            onKeyDown={handleKeyPress}
+            className='mb-0 p-2 border-t border-black rounded-[10px] w-[90%] h-20'
         ></textarea>
-        <button type="submit" className='bg-blue-400 border border-black rounded-sm w-[10%]' disabled={messageTextIsEmpty}>Send</button>
+        <button type="submit" className='bg-blue-400 border-t border-black rounded-sm w-[10%]' disabled={messageTextIsEmpty}>Send</button>
       </form>
     </div>
   );
