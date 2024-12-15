@@ -51,7 +51,7 @@ export default function ChatBox({ username, profilePictureUrl }: { username: str
         <div key={index} className="flex gap-4 bg-blue-300 p-3 rounded-lg w-fit max-w-full break-words">
             <Image
                 alt="Profile Image"
-                src={ profilePictureUrl || "/default-profile.jpeg" }
+                src={ profilePictureUrl }
                 width={50}
                 height={50}
                 className="rounded-full object-cover"
