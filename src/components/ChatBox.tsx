@@ -1,18 +1,19 @@
 "use client";
 import React, { useEffect, useState, useRef, FormEvent, KeyboardEvent } from "react";
 import { useChannel } from "ably/react";
+import Image from "next/image";
 
 interface Message {
     data?: { author: string; text: string };
     connectionId?: string;
 }
 
-export default function ChatBox({ username }: { username: string }) {
+export default function ChatBox({ username, profilePictureUrl }: { username: string, profilePictureUrl: string }) {
     const [messageText, setMessageText] = useState<string>("");
     const [receivedMessages, setMessages] = useState<Message[]>([]);
     const messageTextIsEmpty = messageText.trim().length === 0;
 
-    const { channel, ably } = useChannel("chat-demo", (message: Message) => {
+    const { channel } = useChannel("chat-demo", (message: Message) => {
         const history = receivedMessages.slice(-199);
         setMessages([
             ...history,
@@ -27,7 +28,7 @@ export default function ChatBox({ username }: { username: string }) {
     const messageEnd = useRef<HTMLDivElement>(null);
 
     const sendChatMessage = (messageText: string) => {
-        const message = { data: { author: username ||"unknown user" , text: messageText } };
+        const message = { data: { author: username || "unknown user", text: messageText } };
         channel.publish(message); // Publish message to Ably
         setMessageText(""); // Clear the input box
         inputBox.current?.focus();
@@ -46,10 +47,19 @@ export default function ChatBox({ username }: { username: string }) {
             event.preventDefault();
         }
     };
-
     const messages = receivedMessages.map((message, index) => (
-        <div key={index} className="bg-blue-300 p-3 rounded-lg w-fit">
-            <b>{message.data?.author}:</b> {message.data?.text}
+        <div key={index} className="flex gap-4 bg-blue-300 p-3 rounded-lg w-fit max-w-full break-words">
+            <Image
+                alt="Profile Image"
+                src={ profilePictureUrl || "/default-profile.jpeg" }
+                width={50}
+                height={50}
+                className="rounded-full object-cover"
+            />
+            <div className="flex flex-col">
+                <b>{message.data?.author}:</b>
+                <span>{message.data?.text}</span>
+            </div>
         </div>
     ));
 
