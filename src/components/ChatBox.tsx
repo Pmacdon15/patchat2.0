@@ -81,7 +81,7 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
                 placeholder="Type a message..."
                 onChange={(e) => setMessageText(e.target.value)}
                 onKeyDown={handleKeyPress}
-                className="mb-0 p-2 border border-black rounded-sm w-[70%] md:w-[80%] h-20 overflow-auto focus:outline-none"
+                className="mb-0 p-2 border-t focus:border-t border-black rounded-sm w-[70%] md:w-[80%] h-20 overflow-auto focus:outline-none"
             ></textarea>
             <button
                 type="submit"
