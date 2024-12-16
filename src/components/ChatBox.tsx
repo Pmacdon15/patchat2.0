@@ -70,7 +70,7 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
 
     return (
         <div className="flex flex-col h-full text-gray-500">
-            <div className="flex flex-col gap-4 bg-black p-4 max-h-[500px] overflow-y-auto">
+            <div className="flex flex-col gap-4 p-4 max-h-[500px] overflow-y-auto">
             {messages}
             <div ref={messageEnd}></div>
             </div>
