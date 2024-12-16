@@ -18,7 +18,7 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
         setMessages([
             ...history,
             {
-                data: { profilePictureUrl: profilePictureUrl,author: message.data?.author || "unknown", text: message.data?.text || "" },
+                data: { profilePictureUrl: message.data?.profilePictureUrl || "/default-profile.jpg", author: message.data?.author || "unknown", text: message.data?.text || "" },
                 connectionId: message.connectionId,
             },
         ]);
