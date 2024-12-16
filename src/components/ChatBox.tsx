@@ -72,7 +72,7 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
         const fetchMessages = async () => {
           try {
             const historicalMessages = await channel.history({
-              direction: 'backwards',
+              direction: 'forwards',
               limit: 50
             });
             setMessages(historicalMessages.items);
