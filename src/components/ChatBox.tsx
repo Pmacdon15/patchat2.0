@@ -4,7 +4,7 @@ import { useChannel } from "ably/react";
 import Image from "next/image";
 
 interface Message {
-    data?: { author: string; text: string };
+    data?: { profilePictureUrl: string, author: string; text: string };
     connectionId?: string;
 }
 
@@ -18,7 +18,7 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
         setMessages([
             ...history,
             {
-                data: { author: message.data?.author || "unknown", text: message.data?.text || "" },
+                data: { profilePictureUrl: profilePictureUrl,author: message.data?.author || "unknown", text: message.data?.text || "" },
                 connectionId: message.connectionId,
             },
         ]);
@@ -29,7 +29,7 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
 
     const sendChatMessage = (messageText: string) => {
         if (!signedIn) return;
-        const message = { data: { author: username, text: messageText } };
+        const message = { data: { profilePictureUrl: profilePictureUrl, author: username, text: messageText } };
         channel.publish(message); // Publish message to Ably
         setMessageText(""); // Clear the input box
         inputBox.current?.focus();
@@ -52,7 +52,7 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
         <div key={index} className="flex gap-4 bg-blue-300 p-3 rounded-lg w-fit max-w-full break-words">
             <Image
                 alt="Profile Image"
-                src={profilePictureUrl}
+                src={message.data?.profilePictureUrl || "/default-profile.jpg"}
                 width={50}
                 height={50}
                 className="rounded-full object-cover"
