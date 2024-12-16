@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 async function signOut() {
     const cookieStore = await cookies();
     cookieStore.delete('wos-session');
-    redirect('/logged-out');
+    redirect('/');
 }
 
 export default async function SignOutButton() {
