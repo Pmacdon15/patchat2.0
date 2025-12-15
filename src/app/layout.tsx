@@ -28,10 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         <AuthKitProvider>
-          <div className="grid grid-rows-[1fr_100px] bg-gray-200 min-h-screen">
+          <div className="grid grid-rows-[1fr_100px] min-h-screen">
             {children}
           </div>
         </AuthKitProvider>

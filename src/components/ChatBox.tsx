@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef, FormEvent, KeyboardEvent } from "react";
+import { useEffect, useState, useRef, FormEvent, KeyboardEvent } from "react";
 import { useChannel } from "ably/react";
 import Image from "next/image";
 
@@ -48,21 +48,35 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
             event.preventDefault();
         }
     };
-    const messages = receivedMessages.map((message, index) => (
-        <div key={index} className="flex gap-4 bg-blue-300 p-3 rounded-lg w-fit max-w-full break-words">
-            <Image
-                alt="Profile Image"
-                src={message.data?.profilePictureUrl || "/default-profile.jpg"}
-                width={50}
-                height={50}
-                className="rounded-full object-cover"
-            />
-            <div className="flex flex-col">
-                <b>{message.data?.author}:</b>
-                <span>{message.data?.text}</span>
+    const messages = receivedMessages.map((message, index) => {
+        const isMe = message.data?.author === username;
+        return (
+            <div key={index} className={`flex gap-4 p-3 rounded-lg w-fit max-w-[80%] break-words ${isMe ? "bg-blue-500 text-white self-end rounded-br-none" : "bg-gray-200 text-gray-800 self-start rounded-bl-none"}`}>
+                {!isMe && (
+                    <Image
+                        alt="Profile Image"
+                        src={message.data?.profilePictureUrl || "/default-profile.jpg"}
+                        width={40}
+                        height={40}
+                        className="rounded-full object-cover w-10 h-10"
+                    />
+                )}
+                <div className="flex flex-col">
+                    <span className="font-bold text-xs opacity-80 mb-1">{message.data?.author}</span>
+                    <span>{message.data?.text}</span>
+                </div>
+                {isMe && (
+                     <Image
+                     alt="Profile Image"
+                     src={message.data?.profilePictureUrl || "/default-profile.jpg"}
+                     width={40}
+                     height={40}
+                     className="rounded-full object-cover w-10 h-10"
+                 />
+                )}
             </div>
-        </div>
-    ));
+        );
+    });
 
     useEffect(() => {
         messageEnd.current?.scrollIntoView({ behavior: "smooth" });
@@ -85,9 +99,9 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
 
     return (
         <div className="flex flex-col h-full text-gray-500">
-            <div className="flex flex-col gap-4 p-4 max-h-[500px] overflow-y-auto">
+            <div className="flex flex-col flex-1 gap-4 p-4 overflow-y-auto  ">
                 {messages}
-                <div ref={messageEnd}></div>
+                                <div ref={messageEnd}></div>
             </div>
             <form className="flex mt-auto" onSubmit={handleFormSubmission}>
                 <textarea
@@ -96,7 +110,7 @@ export default function ChatBox({ username, profilePictureUrl, signedIn }: { use
                     placeholder="Type a message..."
                     onChange={(e) => setMessageText(e.target.value)}
                     onKeyDown={handleKeyPress}
-                    className="mb-0 p-2 border-t focus:border-t border-black rounded-sm w-[70%] md:w-[80%] h-20 overflow-auto focus:outline-none"
+                    className="mb-0 p-2 border-t focus:border-t border-black rounded-sm w-[70%] md:w-[80%] h-20 overflow-auto focus:outline-none bg-white text-black"
                 ></textarea>
                 <button
                     type="submit"
